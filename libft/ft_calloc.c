@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 10:49:58 by muhakose          #+#    #+#             */
-/*   Updated: 2023/12/06 11:46:32 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/07/29 14:36:07 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_calloc(size_t count, size_t size)
 
 	if (size != 0 && count > SIZE_MAX / size)
 		return (NULL);
-	p = (void *)malloc((count) * size);
+	p = (void *)ft_gc_malloc((count) * size);
 	if (p == NULL)
 		return (NULL);
 	ft_bzero(p, size * count);

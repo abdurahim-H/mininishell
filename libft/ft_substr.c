@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 12:27:33 by muhakose          #+#    #+#             */
-/*   Updated: 2023/10/14 15:55:20 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/07/29 14:37:06 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size = ft_strlen(s + start);
 	if (size < len)
 		len = size;
-	str = (char *)malloc(sizeof(*s) * (len + 1));
+	str = (char *) ft_gc_malloc (sizeof(*s) * (len + 1));
 	if (!str)
 		return (NULL);
 	i = 0;

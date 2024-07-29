@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:34:47 by muhakose          #+#    #+#             */
-/*   Updated: 2023/12/06 11:54:34 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/07/29 14:36:55 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (count == (int)ft_strlen(s1))
 		return (ft_strdup(""));
 	size = ft_get_size(s1 + count, set) + 1;
-	tab = (char *)malloc((size) * sizeof(char));
+	tab = (char *) ft_gc_malloc ((size) * sizeof(char));
 	if (!tab)
 		return (NULL);
 	ft_strlcpy(tab, s1 + count, size);
