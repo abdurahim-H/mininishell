@@ -1,6 +1,11 @@
 #include "minishell.h"
 
-void parse()
+
+
+
+
+void parse_init(t_mini *mini, char *prompt)
 {
-	printf("hello\n");
+	createPrompt(mini, prompt);
+	printf("%s\n", mini->prompt);
 }

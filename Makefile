@@ -19,7 +19,17 @@ RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -I./include/ -g
 
 SRC_DIR = src
-SRC = main.c parse/parse.c
+SRC =	main.c \
+		parse/parse.c \
+		parse/utils.c \
+		garbage/ft_gc_ctx_create.c \
+		garbage/ft_gc_ctx_delete.c \
+		garbage/ft_gc_ctx_transfer.c \
+		garbage/ft_gc_ctx_wild_manip.c \
+		garbage/ft_gc_global.c \
+		garbage/ft_gc_ptr_utils.c \
+		garbage/ft_gc_static.c
+
 
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
@@ -36,6 +46,7 @@ $(NAME) : $(OBJ_DIR) $(OBJ) $(LIBFT)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 	mkdir -p $(OBJ_DIR)/parse
+	mkdir -p $(OBJ_DIR)/garbage
 
 $(OBJ_DIR)/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -55,6 +66,8 @@ fclean: clean
 
 re: fclean all
 
+leaks: $(NAME)
+	leaks --atExit -- ./$(NAME)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re leaks
 

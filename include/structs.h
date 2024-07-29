@@ -11,7 +11,8 @@ typedef struct s_commands
 
 typedef struct s_mini
 {
-
+	char	*prompt;
+	int		exitcode;
 }	t_mini;
 
 #endif
