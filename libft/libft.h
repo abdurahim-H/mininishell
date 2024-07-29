@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:54:12 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/29 15:27:10 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/07/29 14:25:58 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdint.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include "ft_gc.h"
 
 # define TRUE 1
 # define FALSE 0

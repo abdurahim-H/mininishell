@@ -22,13 +22,7 @@ SRC_DIR = src
 SRC =	main.c \
 		parse/parse.c \
 		parse/utils.c \
-		garbage/ft_gc_ctx_create.c \
-		garbage/ft_gc_ctx_delete.c \
-		garbage/ft_gc_ctx_transfer.c \
-		garbage/ft_gc_ctx_wild_manip.c \
-		garbage/ft_gc_global.c \
-		garbage/ft_gc_ptr_utils.c \
-		garbage/ft_gc_static.c
+
 
 
 OBJ_DIR = obj

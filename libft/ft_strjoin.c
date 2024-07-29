@@ -6,7 +6,7 @@
 /*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:55:20 by muhakose          #+#    #+#             */
-/*   Updated: 2024/02/27 18:32:09 by muhakose         ###   ########.fr       */
+/*   Updated: 2024/07/29 14:30:48 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
 	total_len = len1 + len2 + 1;
-	result = (char *)malloc(total_len);
+	result = (char *) ft_gc_malloc (total_len);
 	if (result == NULL)
 		return (NULL);
 	ft_strcpy(result, s1);
@@ -56,7 +56,7 @@ char	*ft_strjoin_freeself(char *remains, char *buffer)
 	if (!buffer)
 		return (remains);
 	size = ft_strlen(remains) + ft_strlen(buffer);
-	array = malloc (sizeof(char) * (size + 1));
+	array = ft_gc_malloc (sizeof(char) * (size + 1));
 	i = 0;
 	j = 0;
 	if (remains)
@@ -65,8 +65,8 @@ char	*ft_strjoin_freeself(char *remains, char *buffer)
 		array[j++] = buffer[i++];
 	array[size] = '\0';
 	if (remains)
-		free ((void *)remains);
+		ft_gc_free ((void *)remains);
 	if (buffer)
-		free ((void *)buffer);
+		ft_gc_free ((void *)buffer);
 	return (array);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asfletch <asfletch@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: muhakose <muhakose@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 17:09:26 by muhakose          #+#    #+#             */
-/*   Updated: 2024/03/01 13:47:01 by asfletch         ###   ########.fr       */
+/*   Updated: 2024/07/29 14:30:38 by muhakose         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char	*wordup(const char *s, int start, int finish)
 	int		i;
 
 	i = 0;
-	word = (char *) malloc((finish - start + 1) * sizeof(char));
+	word = (char *) ft_gc_malloc ((finish - start + 1) * sizeof(char));
 	if (word == NULL)
 		return (0);
 	while (start < finish)
@@ -55,9 +55,9 @@ static char	**free_array(size_t i, char **array)
 	while (i > 0)
 	{
 		i--;
-		free(*(array + i));
+		ft_gc_free(*(array + i));
 	}
-	free(array);
+	ft_gc_free(array);
 	return (NULL);
 }
 
@@ -92,7 +92,7 @@ char	**ft_split(const char *s, char c)
 {
 	char	**new;
 
-	new = (char **)malloc((word_counter(s, c) + 1) * sizeof(char *));
+	new = (char **) ft_gc_malloc ((word_counter(s, c) + 1) * sizeof(char *));
 	if (!s || !(new))
 		return (0);
 	new = split2(s, c, new);
