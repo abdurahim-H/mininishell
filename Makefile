@@ -19,7 +19,7 @@ RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -I./include/ -g
 
 SRC_DIR = src
-SRC = main.c
+SRC = main.c parse/parse.c
 
 OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
@@ -35,6 +35,7 @@ $(NAME) : $(OBJ_DIR) $(OBJ) $(LIBFT)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
+	mkdir -p $(OBJ_DIR)/parse
 
 $(OBJ_DIR)/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
