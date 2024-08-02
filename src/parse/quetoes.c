@@ -61,5 +61,6 @@ char *get_heredoc(char *stop)
 		str = ft_strjoin_freeself(str, "\n");
 		free(line);
 	}
+	ft_gc_free(stop);
 	return (str);
 }
