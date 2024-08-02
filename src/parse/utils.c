@@ -49,3 +49,13 @@ char	*ft_char_join(char *s1, char c)
 		ft_gc_free(s1);
 	return (result);
 }
+
+char indexc(t_mini *mini)
+{
+	return (mini->prompt->prom[mini->prompt->i]);
+}
+
+int isToken(char c)
+{
+	return (c == '|' || c == '>' || c == '<' || c == '&' || c == ';');
+}

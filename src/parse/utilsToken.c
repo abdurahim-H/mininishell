@@ -45,6 +45,7 @@ void printTokens(Token *head)
 	int i;
 
 	i = 0;
+	printf("------------------------------------------------\n");
 	while (current != NULL)
 	{
 		printf("Token : %d\n", ++i);

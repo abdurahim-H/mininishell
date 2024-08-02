@@ -1,23 +1,21 @@
 #include "minishell.h"
 
-void quetoes_skipper(Prompt *pro)
+static char *giveQuetos(Prompt *pro)
 {
-	if (pro->prom[pro->i] == '\"')
-	{
-		(pro->i)++;
-	}
-	else
-		return ;
+	int start = pro->i;
 	while (pro->prom[pro->i] && pro->prom[pro->i] != '\"')
 	{
 		pro->i++;
 	}
+	return (giveSubstr(pro->prom, start, pro->i));
 }
 
-char *giveQuetos(Prompt *pro)
+static char *giveSingleQuetos(Prompt *pro)
 {
-	int start = pro->i;
-	while (pro->prom[pro->i] && pro->prom[pro->i] != '\"')
+	int start;
+
+	start = pro->i;
+	while (pro->prom[pro->i] && pro->prom[pro->i] != '\'')
 	{
 		pro->i++;
 	}
@@ -31,10 +29,20 @@ char *handle_quetos(Prompt *prompt)
 	if (prompt->prom[prompt->i] == '\"')
 	{
 		(prompt->i)++;
+		newstr = giveQuetos(prompt);
+	}
+	else if (prompt->prom[prompt->i] == '\'')
+	{
+		(prompt->i)++;
+		newstr = giveSingleQuetos(prompt);
 	}
 	else
 		return (NULL);
-	newstr = giveQuetos(prompt);
 	return (newstr);
 }
 
+//char *get_heredoc(char *stop)
+//{
+//	char *str;
+
+//}

@@ -1,0 +1,9 @@
+total 128
+-rw-r--r--   1 muhakose  2023_heilbronn   1269 Aug  2 11:17 Makefile
+-rw-r--r--   1 muhakose  2023_heilbronn    122 Jul 29 14:34 README.md
+drwxr-xr-x   4 muhakose  2023_heilbronn    136 Jul 29 14:34 include
+drwxr-xr-x  71 muhakose  2023_heilbronn   2414 Aug  2 12:03 libft
+-rwxr-xr-x   1 muhakose  2023_heilbronn  55520 Aug  2 13:36 minishell
+drwxr-xr-x   5 muhakose  2023_heilbronn    170 Aug  2 12:03 obj
+-rw-r--r--   1 muhakose  2023_heilbronn      0 Aug  2 13:36 output
+drwxr-xr-x   4 muhakose  2023_heilbronn    136 Jul 29 14:34 src
