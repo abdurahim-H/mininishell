@@ -22,7 +22,10 @@ SRC_DIR = src
 SRC =	main.c \
 		parse/parse.c \
 		parse/utils.c \
-
+		parse/quetoes.c \
+		parse/expand.c \
+		parse/token.c \
+		parse/utilsToken.c \
 
 
 OBJ_DIR = obj
@@ -60,8 +63,5 @@ fclean: clean
 
 re: fclean all
 
-leaks: $(NAME)
-	leaks --atExit -- ./$(NAME)
-
-.PHONY: all clean fclean re leaks
+.PHONY: all clean fclean re
 
