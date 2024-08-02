@@ -30,7 +30,6 @@ int		get_pipe(t_mini *mini, Token *token);
 int		get_cmd(t_mini *mini, Token *token);
 void	printTokens(Token *head);
 
-
 //utils
 char	*ft_char_join(char *s1, char c);
 int		isToken(char c);

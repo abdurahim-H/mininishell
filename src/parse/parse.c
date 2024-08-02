@@ -3,7 +3,6 @@
 
 void parse_helper(t_mini *mini, Token *current)
 {
-	
 	skip_white_space(mini->prompt);
 	if (getEnd(mini, current) == true)
 		return ;
