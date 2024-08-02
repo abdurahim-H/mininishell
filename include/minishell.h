@@ -36,6 +36,7 @@ char	*ft_char_join(char *s1, char c);
 int		isToken(char c);
 char	*findType(int type);
 char	indexc(t_mini *mini);
+char	*get_heredoc(char *stop);
 
 
 void	skip_white_space(Prompt *prompt);

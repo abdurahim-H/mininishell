@@ -41,8 +41,25 @@ char *handle_quetos(Prompt *prompt)
 	return (newstr);
 }
 
-//char *get_heredoc(char *stop)
-//{
-//	char *str;
+char *get_heredoc(char *stop)
+{
+	char *str;
+	char *line;
 
-//}
+	str = NULL;
+	while (1)
+	{
+		line = readline("> ");
+		if (!line)
+			break;
+		if (strcmp(line, stop) == 0)
+		{
+			free(line);
+			break;
+		}
+		str = ft_strjoin_freeself(str, line);
+		str = ft_strjoin_freeself(str, "\n");
+		free(line);
+	}
+	return (str);
+}

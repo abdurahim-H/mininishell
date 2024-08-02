@@ -56,7 +56,7 @@ int getInput(t_mini *mini, Token *token)
 			mini->prompt->i += 1;
 			skip_white_space(mini->prompt);
 			get_cmd(mini, token);
-			//token->text = get_heredoc(token->text);
+			token->text = get_heredoc(token->text);
 			token->type = HEREDOC;
 		}
 		else
