@@ -1,29 +1,27 @@
 #include "minishell.h"
 
-
 void parse_helper(t_mini *mini, Token *current)
 {
 	skip_white_space(mini->prompt);
 	if (getEnd(mini, current) == true)
-		return ;
+		return;
 	if (get_pipe(mini, current) == true)
-		return ;
+		return;
 	if (get_cmd(mini, current) == true)
-		return ;
+		return;
 	if (getInput(mini, current) == true)
-		return ;
+		return;
 	if (getOutput(mini, current) == true)
-		return ;
+		return;
 }
 
-void parse_init(t_mini *mini, char *prompt)
+void start_token(t_mini *mini)
 {
 	Token *current;
 	Token *newToken;
 
 	current = NULL;
 	mini->tokens = NULL;
-	createPrompt(mini, prompt);
 	while (true)
 	{
 		newToken = createToken();
@@ -36,9 +34,45 @@ void parse_init(t_mini *mini, char *prompt)
 		current = newToken;
 		parse_helper(mini, newToken);
 		if (newToken->type == END)
-			break ;
+			break;
 	}
-	printTokens(mini->tokens);
+}
+
+int initCommands(t_mini *mini)
+{
+	Token *current;
+	t_commands *newCmd;
+
+	mini->commads = createCommands();
+	newCmd = mini->commads;
+	current = mini->tokens;
+	while (current != NULL)
+	{
+		if (!fillCommands(mini, newCmd, current))
+			return (false);
+		if (current->type == PIPE)
+		{
+			newCmd->next = createCommands();
+			if (!newCmd->next)
+				return (false);
+			newCmd = newCmd->next;
+		}
+		current = current->next;
+	}
+	return (true);
+}
+
+void parse_init(t_mini *mini, char *prompt)
+{
+	createPrompt(mini, prompt);
+	start_token(mini);
+	// printTokens(mini->tokens);
+	if (initCommands(mini))
+	{
+		 // exec from here;
+	}
+	printCmds(mini->commads);
 	ft_gc_free(mini->prompt);
+	clearTokens(mini);
 	mini->prompt = NULL;
 }

@@ -3,8 +3,8 @@
 Token *createToken()
 {
 	Token *newToken;
-	
-	newToken = (Token *) ft_gc_malloc (sizeof(Token));
+
+	newToken = (Token *)ft_gc_malloc(sizeof(Token));
 	if (!newToken)
 		return NULL;
 	newToken->type = 0;
@@ -17,8 +17,6 @@ char *findType(int type)
 {
 	if (type == COMMAND)
 		return ("COMMAND");
-	else if (type == ARGUMENT)
-		return ("ARGUMENT");
 	else if (type == PIPE)
 		return ("PIPE");
 	else if (type == REDIRECT_IN)
@@ -29,29 +27,21 @@ char *findType(int type)
 		return ("REDIRECT_APPEND");
 	else if (type == HEREDOC)
 		return ("HEREDOC");
-	else if (type == BACKGROUND)
-		return ("BACKGROUND");
-	else if (type == SEMICOLON)
-		return ("SEMICOLON");
 	else if (type == END)
 		return ("END");
 	else
 		return ("INVALID");
 }
 
-void printTokens(Token *head)
+void clearTokens(t_mini *mini)
 {
-	Token *current = head;
-	int i;
-
-	i = 0;
-	printf("------------------------------------------------\n");
-	while (current != NULL)
+	Token *tmp;
+	while (mini->tokens)
 	{
-		printf("Token : %d\n", ++i);
-		printf("Type  : %s\n", findType(current->type));
-		printf("Text  : %s\n", current->text);
-		printf("------------------------------------------------\n");
-		current = current->next;
+		tmp = mini->tokens;
+		mini->tokens = mini->tokens->next;
+		ft_gc_free(tmp->text);
+		ft_gc_free(tmp);
 	}
+	mini->tokens = NULL;
 }

@@ -7,14 +7,11 @@
 typedef enum
 {
 	COMMAND,
-	ARGUMENT,
 	PIPE,
 	REDIRECT_IN,
 	REDIRECT_OUT,
 	REDIRECT_APPEND,
 	HEREDOC,
-	BACKGROUND,
-	SEMICOLON,
 	END,
 	INVALID
 } TokenType;
@@ -34,7 +31,12 @@ typedef struct
 
 typedef struct s_commands
 {
-
+	char				**cmds;
+	int					ind;
+	int					fd_in;
+	int					fd_out;
+	char				*heredoc;
+	struct s_commands	*next;
 } t_commands;
 
 typedef struct s_mini
@@ -42,7 +44,7 @@ typedef struct s_mini
 	Prompt		*prompt;
 	int			exitcode;
 	Token		*tokens;
-	t_commands	commads;
+	t_commands	*commads;
 } t_mini;
 
 #endif

@@ -26,6 +26,10 @@ SRC =	main.c \
 		parse/expand.c \
 		parse/token.c \
 		parse/utilsToken.c \
+		parse/commands.c \
+		parse/fileD.c \
+		utils/print_utils.c \
+		utils/free.c \
 
 
 OBJ_DIR = obj
@@ -43,7 +47,7 @@ $(NAME) : $(OBJ_DIR) $(OBJ) $(LIBFT)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 	mkdir -p $(OBJ_DIR)/parse
-	mkdir -p $(OBJ_DIR)/garbage
+	mkdir -p $(OBJ_DIR)/utils
 
 $(OBJ_DIR)/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
