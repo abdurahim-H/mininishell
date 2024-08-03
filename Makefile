@@ -30,6 +30,7 @@ SRC =	main.c \
 		parse/fileD.c \
 		utils/print_utils.c \
 		utils/free.c \
+		utils/error_msg.c \
 
 
 OBJ_DIR = obj

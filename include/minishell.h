@@ -38,6 +38,7 @@ char		*get_heredoc(char *stop);
 void		skip_white_space(Prompt *prompt);
 char		*handle_quetos(t_mini *mini, Prompt *prompt);
 char		*giveSubstr(char *str, int start, int end);
+void		syntaxError(t_mini *mini, char *c);
 
 //commands
 t_commands	*createCommands();

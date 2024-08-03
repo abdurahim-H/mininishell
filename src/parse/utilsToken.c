@@ -18,17 +18,17 @@ char *findType(int type)
 	if (type == COMMAND)
 		return ("COMMAND");
 	else if (type == PIPE)
-		return ("PIPE");
+		return ("|");
 	else if (type == REDIRECT_IN)
-		return ("REDIRECT_IN");
+		return ("<");
 	else if (type == REDIRECT_OUT)
-		return ("REDIRECT_OUT");
+		return (">");
 	else if (type == REDIRECT_APPEND)
-		return ("REDIRECT_APPEND");
+		return (">>");
 	else if (type == HEREDOC)
-		return ("HEREDOC");
+		return ("<<");
 	else if (type == END)
-		return ("END");
+		return ("newline");
 	else
 		return ("INVALID");
 }

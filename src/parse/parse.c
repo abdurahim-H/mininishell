@@ -52,6 +52,8 @@ int initCommands(t_mini *mini)
 			return (false);
 		if (current->type == PIPE)
 		{
+			if (current->next->type == END)
+				return (syntaxError(mini , "|"), false);
 			newCmd->next = createCommands();
 			if (!newCmd->next)
 				return (false);
@@ -66,7 +68,7 @@ void parse_init(t_mini *mini, char *prompt)
 {
 	createPrompt(mini, prompt);
 	start_token(mini);
-	 printTokens(mini->tokens);
+	//printTokens(mini->tokens);
 	if (initCommands(mini))
 	{
 		 // exec from here;
