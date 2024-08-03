@@ -27,6 +27,7 @@ static char *giveSingleQuetos(Prompt *pro)
 	{
 		pro->i++;
 	}
+	printf("%d\n", pro->prom[pro->i]);
 	return (giveSubstr(pro->prom, start, pro->i));
 }
 

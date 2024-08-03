@@ -2,8 +2,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define ANSI_COLOR_RESET	"\x1b[0m"
-
 # include "structs.h"
 # include "../libft/libft.h"
 # include <readline/readline.h>
@@ -15,7 +13,6 @@
 # include <stdlib.h>
 # include <termios.h>
 # include <limits.h>
-
 
 //parsing
 void		parse_init(t_mini *mini, char *prompt);
@@ -51,7 +48,6 @@ void		printCmds(t_commands *head);
 int			inOpener(char *name);
 int			outOpener(char *name);
 int			outApendOpener(char *name);
-
 
 //free
 void		freeArr(char **arr);

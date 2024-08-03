@@ -2,9 +2,11 @@
 
 int get_cmd(t_mini *mini, Token *token)
 {
-	char *prompt = NULL;
-	char *quetos = NULL;
+	char *prompt;
+	char *quetos;
 
+	prompt = NULL;
+	quetos = NULL;
 	if (isToken(indexc(mini)) || indexc(mini) == '\0')
 		return (false);
 	while (indexc(mini) && !iswhitespace(indexc(mini)) && !isToken(indexc(mini)))
@@ -16,7 +18,8 @@ int get_cmd(t_mini *mini, Token *token)
 			prompt = ft_strjoin_freeself(prompt, handleDolar(mini, mini->prompt));
 		else
 			prompt = ft_char_join(prompt, indexc(mini));
-		mini->prompt->i += 1;
+		if (indexc(mini) && !iswhitespace(indexc(mini)) && !isToken(indexc(mini)))
+			mini->prompt->i += 1;
 	}
 	token->type = COMMAND;
 	token->text = prompt;
