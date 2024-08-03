@@ -12,7 +12,7 @@ void prompt_init(t_mini *mini, int exit_code)
 			printf("exit\n");
 			rl_clear_history();
 			ft_gc_destroy_all_contexts();
-			exit(EXIT_SUCCESS);
+			exit(EXIT_FAILURE);
 		}
 		add_history(prompt);
 		mini->exitcode = exit_code;

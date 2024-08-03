@@ -30,7 +30,7 @@ int	fillCommands(t_mini *mini, t_commands *cmd, Token *token)
 	}
 	else if (token->type == REDIRECT_IN)
 	{
-		if (token->next->type != COMMAND)
+		if (token->next->type != COMMAND && token->text == NULL)
 			return (syntaxError(mini, findType(token->next->type)), false);
 		cmd->fd_in = inOpener(token->text);
 		if (cmd->fd_out == -1)
@@ -41,7 +41,7 @@ int	fillCommands(t_mini *mini, t_commands *cmd, Token *token)
 	}
 	else if (token->type == REDIRECT_OUT)
 	{
-		if (token->next->type != COMMAND)
+		if (token->next->type != COMMAND && token->text == NULL)
 			return (syntaxError(mini, findType(token->next->type)), false);
 		cmd->fd_out = outOpener(token->text);
 		if (cmd->fd_out == -1)
@@ -52,7 +52,7 @@ int	fillCommands(t_mini *mini, t_commands *cmd, Token *token)
 	}
 	else if (token->type == REDIRECT_OUT)
 	{
-		if (token->next->type != COMMAND)
+		if (token->next->type != COMMAND && token->text == NULL)
 			return (syntaxError(mini, findType(token->next->type)), false);
 		cmd->fd_out = outApendOpener(token->text);
 		if (cmd->fd_out == -1)
@@ -63,7 +63,7 @@ int	fillCommands(t_mini *mini, t_commands *cmd, Token *token)
 	}
 	else if (token->type == HEREDOC)
 	{
-		if (token->next->type != COMMAND)
+		if (token->next->type != COMMAND && token->text == NULL)
 			return (syntaxError(mini, findType(token->next->type)), false);
 		cmd->heredoc = ft_strdup(token->text);
 	}
