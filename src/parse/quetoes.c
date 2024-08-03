@@ -1,13 +1,21 @@
 #include "minishell.h"
 
-static char *giveQuetos(Prompt *pro)
+static char *giveQuetos(t_mini *mini, Prompt *pro)
 {
-	int start = pro->i;
+	int		start;
+	char	*str;
+	
+	str = NULL;
+	start = pro->i;
 	while (pro->prom[pro->i] && pro->prom[pro->i] != '\"')
 	{
+		if (pro->prom[pro->i] == '$')
+			str = ft_strjoin_freeself(str, handleDolar(mini, pro));
+		else
+			str = ft_char_join(str, pro->prom[pro->i]);
 		pro->i++;
 	}
-	return (giveSubstr(pro->prom, start, pro->i));
+	return (str);
 }
 
 static char *giveSingleQuetos(Prompt *pro)
@@ -22,14 +30,14 @@ static char *giveSingleQuetos(Prompt *pro)
 	return (giveSubstr(pro->prom, start, pro->i));
 }
 
-char *handle_quetos(Prompt *prompt)
+char *handle_quetos(t_mini *mini, Prompt *prompt)
 {
 	char *newstr;
 
 	if (prompt->prom[prompt->i] == '\"')
 	{
 		(prompt->i)++;
-		newstr = giveQuetos(prompt);
+		newstr = giveQuetos(mini, prompt);
 	}
 	else if (prompt->prom[prompt->i] == '\'')
 	{

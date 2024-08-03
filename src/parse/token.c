@@ -9,9 +9,11 @@ int get_cmd(t_mini *mini, Token *token)
 		return (false);
 	while (indexc(mini) && !iswhitespace(indexc(mini)) && !isToken(indexc(mini)))
 	{
-		quetos = handle_quetos(mini->prompt);
+		quetos = handle_quetos(mini, mini->prompt);
 		if (quetos)
 			prompt = ft_strjoin_freeself(prompt, quetos);
+		else if (indexc(mini) == '$')
+			prompt = ft_strjoin_freeself(prompt, handleDolar(mini, mini->prompt));
 		else
 			prompt = ft_char_join(prompt, indexc(mini));
 		mini->prompt->i += 1;

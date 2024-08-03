@@ -30,6 +30,7 @@ int			get_pipe(t_mini *mini, Token *token);
 int			get_cmd(t_mini *mini, Token *token);
 void		printTokens(Token *head);
 void		clearTokens(t_mini *mini);
+char		*handleDolar(t_mini *mini, Prompt *prompt);
 
 //utils
 char		*ft_char_join(char *s1, char c);
@@ -38,7 +39,7 @@ char		*findType(int type);
 char		indexc(t_mini *mini);
 char		*get_heredoc(char *stop);
 void		skip_white_space(Prompt *prompt);
-char		*handle_quetos(Prompt *prompt);
+char		*handle_quetos(t_mini *mini, Prompt *prompt);
 char		*giveSubstr(char *str, int start, int end);
 
 //commands
