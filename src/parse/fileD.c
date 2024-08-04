@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 int inOpener(char *name)
 {
 	int		fd;
