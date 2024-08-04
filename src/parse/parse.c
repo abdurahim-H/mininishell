@@ -71,9 +71,9 @@ void parse_init(t_mini *mini, char *prompt)
 	//printTokens(mini->tokens);
 	if (initCommands(mini))
 	{
-		 // exec from here;
+		// exec from here;
 	}
-	//printCmds(mini->commads);
+	printCmds(mini->commads);
 	ft_gc_free(mini->prompt);
 	clearTokens(mini);
 	mini->prompt = NULL;

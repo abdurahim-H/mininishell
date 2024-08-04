@@ -33,6 +33,8 @@ int	fillCommands(t_mini *mini, t_commands *cmd, Token *token)
 		if (token->next->type != COMMAND && token->text == NULL)
 			return (syntaxError(mini, findType(token->next->type)), false);
 		cmd->fd_in = inOpener(token->text);
+		ft_gc_free(cmd->heredoc);
+		cmd->heredoc = NULL;
 		if (cmd->fd_out == -1)
 		{
 			mini->exitcode = 1;

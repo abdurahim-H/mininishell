@@ -5,7 +5,7 @@ static char *giveQuetos(t_mini *mini, Prompt *pro)
 	int		start;
 	char	*str;
 	
-	str = NULL;
+	str = ft_strdup("");
 	start = pro->i;
 	while (pro->prom[pro->i] && pro->prom[pro->i] != '\"')
 	{
@@ -27,7 +27,6 @@ static char *giveSingleQuetos(Prompt *pro)
 	{
 		pro->i++;
 	}
-	printf("%d\n", pro->prom[pro->i]);
 	return (giveSubstr(pro->prom, start, pro->i));
 }
 
