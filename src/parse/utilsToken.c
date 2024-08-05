@@ -36,6 +36,7 @@ char *findType(int type)
 void clearTokens(t_mini *mini)
 {
 	Token *tmp;
+
 	while (mini->tokens)
 	{
 		tmp = mini->tokens;
@@ -44,4 +45,20 @@ void clearTokens(t_mini *mini)
 		ft_gc_free(tmp);
 	}
 	mini->tokens = NULL;
+}
+
+void clear_cmds(t_commands *cmds)
+{
+	if (!cmds)
+		return ;
+	t_commands *tmp;
+	while (cmds)
+	{
+		tmp = cmds;
+		cmds = cmds->next;
+		if (tmp->cmds)
+			freeArr(tmp->cmds);
+		ft_gc_free(tmp);
+	}
+	cmds = NULL;
 }

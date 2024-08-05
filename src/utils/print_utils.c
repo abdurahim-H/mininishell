@@ -30,8 +30,11 @@ void printCmds(t_commands *head)
 		int n = -1;
 		if (current->cmds)
 		{
-			while (current->cmds[++n])
-				printf("Arg_%d : %s\n", n, current->cmds[n]);
+			if (current->cmds[0])
+			{
+				while (current->cmds[++n])
+					printf("Arg_%d : %s\n", n, current->cmds[n]);
+			}
 		}
 		printf("Fd_in   : %d\n", current->fd_in);
 		printf("Fd_out  : %d\n", current->fd_out);

@@ -12,6 +12,7 @@ t_commands *createCommands()
 	newCmd->fd_in = 0;
 	newCmd->fd_out = 0;
 	newCmd->ind = 0;
+	newCmd->next = NULL;
 	return (newCmd);
 }
 
@@ -32,8 +33,11 @@ int	fillCommands(t_mini *mini, t_commands *cmd, Token *token)
 	{
 		if (token->next->type != COMMAND && token->text == NULL)
 			return (syntaxError(mini, findType(token->next->type)), false);
+		if (cmd->fd_in)
+			close(cmd->fd_in);
 		cmd->fd_in = inOpener(token->text);
-		ft_gc_free(cmd->heredoc);
+		if (cmd->heredoc)
+			ft_gc_free(cmd->heredoc);
 		cmd->heredoc = NULL;
 		if (cmd->fd_out == -1)
 		{
@@ -56,6 +60,8 @@ int	fillCommands(t_mini *mini, t_commands *cmd, Token *token)
 	{
 		if (token->next->type != COMMAND && token->text == NULL)
 			return (syntaxError(mini, findType(token->next->type)), false);
+		if (cmd->fd_out)
+			close(cmd->fd_out);
 		cmd->fd_out = outApendOpener(token->text);
 		if (cmd->fd_out == -1)
 		{

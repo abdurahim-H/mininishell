@@ -53,6 +53,7 @@ int			outApendOpener(char *name);
 //free
 void		freeArr(char **arr);
 char		**ft_realloc_char(char **ptr, int j);
+void		clear_cmds(t_commands *cmds);
 
 
 

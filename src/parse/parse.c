@@ -40,12 +40,12 @@ void start_token(t_mini *mini)
 
 int initCommands(t_mini *mini)
 {
-	Token *current;
-	t_commands *newCmd;
+	Token		*current;
+	t_commands	*newCmd;
 
+	current = mini->tokens;
 	mini->commads = createCommands();
 	newCmd = mini->commads;
-	current = mini->tokens;
 	while (current != NULL)
 	{
 		if (!fillCommands(mini, newCmd, current))
@@ -68,7 +68,7 @@ void parse_init(t_mini *mini, char *prompt)
 {
 	createPrompt(mini, prompt);
 	start_token(mini);
-	//printTokens(mini->tokens);
+	printTokens(mini->tokens);
 	if (initCommands(mini))
 	{
 		// exec from here;
@@ -76,5 +76,6 @@ void parse_init(t_mini *mini, char *prompt)
 	printCmds(mini->commads);
 	ft_gc_free(mini->prompt);
 	clearTokens(mini);
+	clear_cmds(mini->commads);
 	mini->prompt = NULL;
 }
