@@ -49,6 +49,8 @@ int	fillCommands(t_mini *mini, t_commands *cmd, Token *token)
 	{
 		if (token->next->type != COMMAND && token->text == NULL)
 			return (syntaxError(mini, findType(token->next->type)), false);
+		if (cmd->fd_out)
+			close(cmd->fd_out);
 		cmd->fd_out = outOpener(token->text);
 		if (cmd->fd_out == -1)
 		{
@@ -56,7 +58,7 @@ int	fillCommands(t_mini *mini, t_commands *cmd, Token *token)
 			return (false);
 		}
 	}
-	else if (token->type == REDIRECT_OUT)
+	else if (token->type == REDIRECT_APPEND)
 	{
 		if (token->next->type != COMMAND && token->text == NULL)
 			return (syntaxError(mini, findType(token->next->type)), false);

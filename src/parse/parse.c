@@ -68,7 +68,7 @@ void parse_init(t_mini *mini, char *prompt)
 {
 	createPrompt(mini, prompt);
 	start_token(mini);
-	printTokens(mini->tokens);
+	//printTokens(mini->tokens);
 	if (initCommands(mini))
 	{
 		// exec from here;
