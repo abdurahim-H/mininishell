@@ -56,46 +56,52 @@ int	find_env_index(char **envp, const char *name)
 
 int ft_setenv(t_mini *mini, const char *name, const char *value)
 {
-	int					index;
-	char				*new_entry;
-	size_t				name_len;
-	size_t				value_len;
-	size_t				i;
+    int index = find_env_index(mini->envp, name);
+    char *new_entry;
+    size_t name_len = strlen(name);
+    size_t value_len = strlen(value);
 
-	name_len = strlen(name);
-	value_len = strlen(value);
-	new_entry = malloc(name_len + value_len + 2);
-	if (!new_entry)
-	{
-		perror("ft_setenv: malloc failed");
-		return (-1);
-	}
-	sprintf(new_entry, "%s=%s", name, value);
-	// printf("ft_setenv: Adding/Updating environment variable: %s\n", new_entry);
-	index = find_env_index(mini->envp, name);
-	if (index != -1)
-	{
-		free(mini->envp[index]);
-		mini->envp[index] = new_entry;
-	}
-	else
-	{
-		i = 0;
-		while (mini->envp[i] != NULL)
-			i++;
-		char **new_envp = realloc(mini->envp, (i + 2) * sizeof(char *));
-		if (!new_envp)
-		{
-			free(new_entry);
-			perror("ft_setenv: realloc failed");
-			return (-1);
-		}
-		mini->envp = new_envp;
-		mini->envp[i] = new_entry;
-		mini->envp[i + 1] = NULL;
-	}
-	return (0);
+    new_entry = malloc(name_len + value_len + 2);
+    if (!new_entry)
+    {
+        perror("ft_setenv: malloc failed");
+        return (-1);
+    }
+    sprintf(new_entry, "%s=%s", name, value);
+
+    if (index != -1)
+    {
+        free(mini->envp[index]);
+        mini->envp[index] = new_entry;
+    }
+    else
+    {
+        // Count existing environment variables
+        int count = 0;
+        while (mini->envp[count])
+            count++;
+
+        // Reallocate envp to hold the new variable and NULL terminator
+        char **new_envp = realloc(mini->envp, sizeof(char *) * (count + 2));
+        if (!new_envp)
+        {
+            free(new_entry);
+            perror("ft_setenv: realloc failed");
+            return (-1);
+        }
+
+        // Add the new environment variable
+        new_envp[count] = new_entry;
+        new_envp[count + 1] = NULL;
+
+        // Update mini->envp to point to the new array
+        mini->envp = new_envp;
+    }
+
+    return (0);
 }
+
+
 
 void execute_export(t_commands *current, t_mini *mini)
 {

@@ -32,30 +32,30 @@ void check_leaks(void)
 	}
 }
 
-char **duplicate_envp(char **envp)
+char	**duplicate_envp(char **envp)
 {
-    int     i;
-    int     count;
-    char    **new_envp;
-
-    count = 0;
+    int count = 0;
     while (envp[count])
         count++;
-    new_envp = ft_gc_malloc(sizeof(char *) * (count + 1));
+    char **new_envp = malloc(sizeof(char *) * (count + 1));
     if (!new_envp)
     {
         perror("malloc");
         exit(EXIT_FAILURE);
     }
-    i = 0;
-    while (i < count)
+    for (int i = 0; i < count; i++)
     {
-        new_envp[i] = ft_strdup(envp[i]);
-        i++;
+        new_envp[i] = strdup(envp[i]);
+        if (!new_envp[i])
+        {
+            perror("strdup");
+            // Handle cleanup if necessary
+        }
     }
-    new_envp[i] = NULL;
-    return (new_envp);
+    new_envp[count] = NULL;
+    return new_envp;
 }
+
 
 int main(int argc, char **argv, char **envp)
 {

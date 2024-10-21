@@ -36,6 +36,13 @@ void	execute_commands(t_mini *mini)
 		if (current->heredoc)
 		{
 			handle_heredoc(current);
+			if (current->fd_in == -1)
+			{
+				mini->exitcode = 1;
+				current = current->next;
+				continue;
+			}
+			
 		}
 		if (strcmp(current->cmds[0], "echo") == 0 ||
 			strcmp(current->cmds[0], "cd") == 0 ||

@@ -189,13 +189,21 @@ char	*find_command_path(const char *cmd, t_mini *mini)
 	}
 	path_env = my_ft_getenv(mini, "PATH");
 	if (!path_env)
+	{
+		fprintf(stderr, "Warning: PATH is not set.\n");
 		return (NULL);
+	}
 	dirs = my_ft_split(path_env, ':');
 	if (!dirs)
 		return (NULL);
 	i = 0;
 	while (dirs[i])
 	{
+		if (dirs[i][0] == '\0')
+		{
+			i++;
+			continue;
+		}
 		full_path = my_ft_strjoin(dirs[i], "/");
 		if (!full_path)
 		{
