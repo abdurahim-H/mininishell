@@ -2,7 +2,8 @@
 #ifndef STRUCTS_H
 #define STRUCTS_H
 
-#include <sys/wait.h>
+# include <sys/wait.h>
+# include <stdbool.h>
 
 typedef enum
 {
@@ -35,7 +36,10 @@ typedef struct s_commands
 	int					ind;
 	int					fd_in;
 	int					fd_out;
+	int					saved_stdin;
+	int					saved_stdout;
 	char				*heredoc;
+	bool				is_pipe;
 	struct s_commands	*next;
 } t_commands;
 
@@ -44,7 +48,8 @@ typedef struct s_mini
 	Prompt		*prompt;
 	int			exitcode;
 	Token		*tokens;
-	t_commands	*commads;
+	t_commands	*commands;
+	char		**envp;
 } t_mini;
 
 #endif

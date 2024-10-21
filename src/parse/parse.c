@@ -44,8 +44,8 @@ int initCommands(t_mini *mini)
 	t_commands	*newCmd;
 
 	current = mini->tokens;
-	mini->commads = createCommands();
-	newCmd = mini->commads;
+	mini->commands = createCommands();
+	newCmd = mini->commands;
 	while (current != NULL)
 	{
 		if (!fillCommands(mini, newCmd, current))
@@ -54,6 +54,7 @@ int initCommands(t_mini *mini)
 		{
 			if (current->next->type == END)
 				return (syntaxError(mini , "|"), false);
+			newCmd->is_pipe = true;
 			newCmd->next = createCommands();
 			if (!newCmd->next)
 				return (false);
@@ -72,10 +73,11 @@ void parse_init(t_mini *mini, char *prompt)
 	if (initCommands(mini))
 	{
 		// exec from here;
+		execute_commands(mini);
 	}
-	printCmds(mini->commads);
+	// printCmds(mini->commands);
 	ft_gc_free(mini->prompt);
 	clearTokens(mini);
-	clear_cmds(mini->commads);
+	clear_cmds(mini->commands);
 	mini->prompt = NULL;
 }

@@ -13,6 +13,8 @@
 # include <stdlib.h>
 # include <termios.h>
 # include <limits.h>
+# include <errno.h>
+# include <string.h>
 
 //parsing
 void		parse_init(t_mini *mini, char *prompt);
@@ -55,11 +57,26 @@ void		freeArr(char **arr);
 char		**ft_realloc_char(char **ptr, int j);
 void		clear_cmds(t_commands *cmds);
 
-
-
-
-
-
+//execution
+void		execute_echo(t_commands *current, t_mini *mini);
+void		execute_exit(t_commands *current, t_mini *mini);
+void		execute_cd(t_commands *current, t_mini *mini);
+void		execute_pwd(t_commands *current, t_mini *mini);
+void		handle_heredoc(t_commands *cmd);
+void		execute_commands(t_mini *mini);
+char		*ft_getenv(t_mini *mini, const char *name);
+int			ft_setenv(t_mini *mini, const char *name, const char *value);
+int			find_env_index(char **envp, const char *name);
+int			is_valid_identifier(const char *key);
+void		remove_env_var(t_mini *mini, const char *var_name);
+void		execute_unset(t_commands *current, t_mini *mini);
+void		execute_export(t_commands *current, t_mini *mini);
+void		execute_env(t_commands *current, t_mini *mini);
+void		handle_heredoc(t_commands *cmd);
+void		restore_builtin_redirections(t_commands *current);
+void		handle_builtin_redirections(t_commands *current);
+char		*find_command_path(const char *cmd, t_mini *mini);
+void		setup_signal_handlers(void);
 
 
 #endif

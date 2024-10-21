@@ -1,4 +1,3 @@
-
 .SILENT:
 
 COLOUR_DEFAULT = \033[0m
@@ -28,6 +27,12 @@ SRC =	main.c \
 		parse/utilsToken.c \
 		parse/commands.c \
 		parse/fileD.c \
+		execution/execution.c \
+		execution/builtins_00.c \
+		execution/builtins_01.c \
+		execution/heredoc_00.c \
+		execution/path.c \
+		execution/signals.c \
 		utils/print_utils.c \
 		utils/free.c \
 		utils/error_msg.c \
@@ -41,7 +46,7 @@ NAME = minishell
 LIBFTDIR = libft
 LIBFT = $(LIBFTDIR)/libft.a
 
-$(NAME) : $(OBJ_DIR) $(OBJ) $(LIBFT)
+$(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LDFLAGS) -o $(NAME) -lreadline
 	echo "$(COLOUR_MAGENTA)Minishell compiled successfully!$(COLOUR_END)"
 
@@ -49,14 +54,16 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 	mkdir -p $(OBJ_DIR)/parse
 	mkdir -p $(OBJ_DIR)/utils
+	mkdir -p $(OBJ_DIR)/execution
 
-$(OBJ_DIR)/%.o: src/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
 	make -C $(LIBFTDIR) && make clean -C $(LIBFTDIR)
 
-all : $(NAME)
+all: $(NAME)
 
 clean:
 	$(RM) -rf $(OBJ_DIR)

@@ -13,6 +13,9 @@ t_commands *createCommands()
 	newCmd->fd_out = 0;
 	newCmd->ind = 0;
 	newCmd->next = NULL;
+	newCmd->saved_stdin = -1;
+	newCmd->saved_stdout = -1;
+	newCmd->is_pipe = false;
 	return (newCmd);
 }
 
@@ -77,5 +80,7 @@ int	fillCommands(t_mini *mini, t_commands *cmd, Token *token)
 			return (syntaxError(mini, findType(token->next->type)), false);
 		cmd->heredoc = ft_strdup(token->text);
 	}
+	else if (token->type == PIPE)
+		return (true);
 	return (true);
 }
