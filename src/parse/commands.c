@@ -84,3 +84,5 @@ int	fillCommands(t_mini *mini, t_commands *cmd, Token *token)
 		return (true);
 	return (true);
 }
+
+//------------------------------------------------------------------------//
