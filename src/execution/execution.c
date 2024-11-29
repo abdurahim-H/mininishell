@@ -179,21 +179,44 @@ void	execute_forked_command(t_commands *current, t_mini *mini, int prev_pipe_fd[
 	}
 }
 
-void	setup_execution_environment(t_commands *current, t_mini *mini, int prev_pipe_fd[2], int pipe_fd[2], bool *execute_in_parent, bool *current_is_builtin, bool has_pipelines)
+// void	setup_execution_environment(t_commands *current, t_mini *mini, int prev_pipe_fd[2], int pipe_fd[2], bool *execute_in_parent, bool *current_is_builtin, bool has_pipelines)
+// {
+// 	*current_is_builtin = is_builtin(current->cmds[0]);
+// 	*execute_in_parent = *current_is_builtin && !has_pipelines;
+// 	if (current->is_pipe)
+// 	{
+// 		if (pipe(pipe_fd) == -1)
+// 		{
+// 			perror("pipe");
+// 			mini->exitcode = 1;
+// 			return;
+// 		}
+// 	}
+// 	(void)prev_pipe_fd[2];
+// }
+
+void setup_execution_environment(t_commands *current, t_mini *mini, int prev_pipe_fd[2], int pipe_fd[2], bool *execute_in_parent, bool *current_is_builtin, bool has_pipelines)
 {
-	*current_is_builtin = is_builtin(current->cmds[0]);
-	*execute_in_parent = *current_is_builtin && !has_pipelines;
-	if (current->is_pipe)
-	{
-		if (pipe(pipe_fd) == -1)
-		{
-			perror("pipe");
-			mini->exitcode = 1;
-			return;
-		}
-	}
-	(void)prev_pipe_fd[2];
+    if (!current || !current->cmds || !current->cmds[0]) {
+        fprintf(stderr, "Error: Invalid command structure in setup_execution_environment\n");
+        *execute_in_parent = false;
+        *current_is_builtin = false;
+        return;
+    }
+
+    *current_is_builtin = is_builtin(current->cmds[0]);
+    *execute_in_parent = *current_is_builtin && !has_pipelines;
+
+    if (current->is_pipe) {
+        if (pipe(pipe_fd) == -1) {
+        perror("pipe");
+        mini->exitcode = 1;
+        return;
+        }
+    }
+    (void)prev_pipe_fd[2];
 }
+
 
 void	fork_and_execute(t_commands *current, t_mini *mini, int prev_pipe_fd[2],
 						int pipe_fd[2], bool current_is_builtin)
@@ -255,23 +278,50 @@ void	finalize_execution(t_mini *mini, int saved_stdin, int saved_stdout)
 	close(saved_stdout);
 }
 
-void	execute_commands(t_mini *mini)
+// void	execute_commands(t_mini *mini)
+// {
+// 	t_commands *current = mini->commands;
+// 	int prev_pipe_fd[2] = {-1, -1};
+// 	int saved_stdin, saved_stdout;
+// 	bool has_pipelines;
+
+// 	initialize_execution(mini, &saved_stdin, &saved_stdout, &has_pipelines);
+
+// 	while (current != NULL)
+// 	{
+// 		execute_command_wrapper(current, mini, prev_pipe_fd, has_pipelines);
+// 		current = current->next;
+// 	}
+
+// 	if (prev_pipe_fd[0] != -1) close(prev_pipe_fd[0]);
+// 	if (prev_pipe_fd[1] != -1) close(prev_pipe_fd[1]);
+
+// 	finalize_execution(mini, saved_stdin, saved_stdout);
+// }
+
+
+void execute_commands(t_mini *mini)
 {
-	t_commands *current = mini->commands;
-	int prev_pipe_fd[2] = {-1, -1};
-	int saved_stdin, saved_stdout;
-	bool has_pipelines;
+    t_commands *current = mini->commands;
+    int prev_pipe_fd[2] = {-1, -1};
+    int saved_stdin, saved_stdout;
+    bool has_pipelines;
 
-	initialize_execution(mini, &saved_stdin, &saved_stdout, &has_pipelines);
+    initialize_execution(mini, &saved_stdin, &saved_stdout, &has_pipelines);
 
-	while (current != NULL)
-	{
-		execute_command_wrapper(current, mini, prev_pipe_fd, has_pipelines);
-		current = current->next;
-	}
+    while (current != NULL)
+    {
+        if (!current->cmds || !current->cmds[0]) {
+            current = current->next;
+            continue;
+        }
 
-	if (prev_pipe_fd[0] != -1) close(prev_pipe_fd[0]);
-	if (prev_pipe_fd[1] != -1) close(prev_pipe_fd[1]);
+        execute_command_wrapper(current, mini, prev_pipe_fd, has_pipelines);
+        current = current->next;
+    }
 
-	finalize_execution(mini, saved_stdin, saved_stdout);
+    if (prev_pipe_fd[0] != -1) close(prev_pipe_fd[0]);
+    if (prev_pipe_fd[1] != -1) close(prev_pipe_fd[1]);
+
+    finalize_execution(mini, saved_stdin, saved_stdout);
 }

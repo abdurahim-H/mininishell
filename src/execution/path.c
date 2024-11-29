@@ -376,7 +376,7 @@ char **my_ft_split(const char *s, char c)
  * @param delimiter The delimiter character.
  * @return Number of words.
  */
-static size_t count_words(const char *s, char delimiter)
+size_t count_words(const char *s, char delimiter)
 {
     size_t count = 0;
     size_t i = 0;
@@ -398,7 +398,7 @@ static size_t count_words(const char *s, char delimiter)
  * @param count Number of words.
  * @return Allocated array or NULL on failure.
  */
-static char **allocate_split_result(size_t count)
+char **allocate_split_result(size_t count)
 {
     char **result;
 
@@ -416,7 +416,7 @@ static char **allocate_split_result(size_t count)
  * @param delimiter The delimiter character.
  * @return true on success, false on failure.
  */
-static bool populate_split_result(char **result, const char *s, char delimiter)
+bool populate_split_result(char **result, const char *s, char delimiter)
 {
     size_t i = 0;
     size_t j = 0;
@@ -460,7 +460,7 @@ char *find_command_path(const char *cmd, t_mini *mini)
  * @param cmd The command with a direct path.
  * @return Duplicated command path if executable, else NULL.
  */
-static char *get_path_direct_command(const char *cmd)
+char *get_path_direct_command(const char *cmd)
 {
     if (access(cmd, X_OK) == 0)
         return my_ft_strdup(cmd);
@@ -474,7 +474,7 @@ static char *get_path_direct_command(const char *cmd)
  * @param cmd The command name.
  * @return The full path to the command or NULL on failure.
  */
-static char *construct_full_path(const char *dir, const char *cmd)
+char *construct_full_path(const char *dir, const char *cmd)
 {
     char *path;
     char *temp;
@@ -492,7 +492,7 @@ static char *construct_full_path(const char *dir, const char *cmd)
  * @param mini Pointer to the minishell structure containing environment variables.
  * @return Array of directory strings or NULL on failure.
  */
-static char **get_split_path(t_mini *mini)
+char **get_split_path(t_mini *mini)
 {
     char *path_env = my_ft_getenv(mini, "PATH");
     if (!path_env) {
@@ -509,7 +509,7 @@ static char **get_split_path(t_mini *mini)
  * @param cmd The command to find.
  * @return Full path to the executable or NULL if not found.
  */
-static char *find_executable_in_dirs(char **dirs, const char *cmd)
+char *find_executable_in_dirs(char **dirs, const char *cmd)
 {
     int i;
     char *full_path;
@@ -536,7 +536,7 @@ static char *find_executable_in_dirs(char **dirs, const char *cmd)
  * @param cmd The command to find.
  * @return Full path to the executable or NULL if not found.
  */
-static char *search_in_paths(t_mini *mini, const char *cmd)
+char *search_in_paths(t_mini *mini, const char *cmd)
 {
     char **dirs;
     char *full_path;

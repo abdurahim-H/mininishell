@@ -15,7 +15,7 @@ COLOUR_END = \033[0m
 
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -I./include/ -g
+CFLAGS = -I./include/ -g
 
 SRC_DIR = src
 SRC =	main.c \
