@@ -83,15 +83,15 @@ bool		is_builtin(const char *cmd);
 
 //test - did not worked for now
 // Helper function prototypes
-static size_t	count_words(const char *s, char delimiter);
-static char	**allocate_split_result(size_t count);
-static bool	populate_split_result(char **result, const char *s, char delimiter);
+size_t	count_words(const char *s, char delimiter);
+char	**allocate_split_result(size_t count);
+bool	populate_split_result(char **result, const char *s, char delimiter);
 // Helper function prototypes
-static char	*get_path_direct_command(const char *cmd);
-static char	*construct_full_path(const char *dir, const char *cmd);
-static char	*search_in_paths(t_mini *mini, const char *cmd);
-static char	**get_split_path(t_mini *mini);
-static char	*find_executable_in_dirs(char **dirs, const char *cmd);
+char	*get_path_direct_command(const char *cmd);
+char	*construct_full_path(const char *dir, const char *cmd);
+char	*search_in_paths(t_mini *mini, const char *cmd);
+char	**get_split_path(t_mini *mini);
+char	*find_executable_in_dirs(char **dirs, const char *cmd);
 
 
 #endif
