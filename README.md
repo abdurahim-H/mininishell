@@ -66,7 +66,7 @@ minishell/
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/minishell.git
+   git clone https://github.com/abdurahim-H/mininishell.git
    cd minishell
    ```
 
