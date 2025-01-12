@@ -41,12 +41,14 @@ Welcome to **Minishell**, a 42 School project where we build a simple yet powerf
 ```plaintext
 minishell/
 ├── include/           # Header files
+├── libft/             # Libft files
+├── minishell_tester/  # To run different test cases
 ├── src/               # Source code files
 │   ├── execution/     # Command execution logic
-│   ├── parsing/       # Input parsing logic
-│   ├── builtins/      # Built-in command implementations
-│   ├── signals/       # Signal handling
+│   ├── parse/         # Input parsing logic
 │   ├── utils/         # Helper functions
+├── .gitignore         # Gitignore
+├── LICENSE            # Project License
 ├── Makefile           # Build system
 └── README.md          # Project documentation
 ```
